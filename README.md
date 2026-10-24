@@ -17,6 +17,43 @@
 - есть игры, персонажи, заявки и чат;
 - чат поддерживает WebSocket через Socket.IO.
 
+## Локальный запуск (одна команда)
+
+Нужен только Node.js 20+. Системный PostgreSQL не требуется: скрипт поднимает
+настоящий PostgreSQL из npm-пакета `embedded-postgres` прямо из `node_modules`.
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
+
+Что происходит:
+- `scripts/dev-db.mjs` инициализирует кластер в `/tmp/dnd-holl-pgdata` (порт 5433)
+  и создаёт базу `dndholl`;
+- `src/server.js` сам создаёт таблицы при первом старте и слушает порт 3000.
+
+Полезные команды:
+
+```bash
+npm run seed       # демо-данные: 3 мастера, 3 игры, 3 персонажа
+npm run db         # только база, без сайта
+npm start          # только сайт (нужен готовый DATABASE_URL)
+PORT=8080 npm run dev
+```
+
+Демо-аккаунты после `npm run seed` (пароль у всех `dndholl123`):
+`gm@dndholl.ru`, `kora@dndholl.ru`, `borin@dndholl.ru`.
+
+Переменные окружения:
+
+| Переменная | По умолчанию | Зачем |
+| --- | --- | --- |
+| `DATABASE_URL` | `postgres://postgres:postgres@127.0.0.1:5433/dndholl` | строка подключения к PostgreSQL |
+| `PORT` | `3000` (`10000` на Render) | порт сайта |
+| `JWT_SECRET` | `dev-only-secret` | подпись токенов, на проде задавать обязательно |
+| `DND_PGDATA` | `/tmp/dnd-holl-pgdata` | каталог данных встроенной базы |
+| `DND_PGPORT` | `5433` | порт встроенной базы |
+
 ## Развёртывание
 
 1. Создайте GitHub repository, например `dnd-holl`.
@@ -47,4 +84,7 @@ Service → Settings → Custom Domains → Add Custom Domain.
 
 `public/` — frontend.
 `src/server.js` — backend + API + WebSocket.
+`scripts/dev.mjs` — запуск базы и сайта одной командой.
+`scripts/dev-db.mjs` — локальный PostgreSQL без установки в систему.
+`scripts/seed.mjs` — демо-данные.
 `render.yaml` — автоматическое создание сервера и PostgreSQL.
