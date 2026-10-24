@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071522"><title>DND Holl</title><link rel="stylesheet" href="/styles.css"><script src="/socket.io/socket.io.js"></script></head><body>
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071522"><title>DND Holl</title><link rel="stylesheet" href="/styles.css"></head><body>
 <header><a class="logo" href="/">DND <b>Holl</b></a><nav><a href="#games">Игры</a><a href="#calendar">Календарь</a><a href="#characters">Персонажи</a><a href="#profile">Профиль</a></nav><button id="authBtn" class="primary">Войти</button></header>
 <section class="hero"><div><label>DND HOLL</label><h1>Найди свою следующую<br><span>приключенческую игру</span></h1><p>Создавай персонажей, находи игроков и мастеров, планируй сессии и играй вместе.</p><a class="primary btn" href="#games">Найти игру</a> <button class="btn" id="newGame">+ Создать игру</button></div><div class="hero-art">D20</div></section>
 <main>
@@ -9,4 +9,5 @@
 <section id="lobby" class="chat-section"><label>ЛОББИ</label><h2>Чат игроков</h2><div class="chat"><div id="messages"></div><form id="chatForm"><input id="chatInput" placeholder="Сообщение или /roll 1d20+5"><button class="primary btn">Отправить</button></form></div></section>
 </main>
 <div id="modal" class="modal"><div class="modalbox"><button id="close">×</button><div id="modalContent"></div></div></div>
+<script src="/app.js"></script><script src="/socket.io/socket.io.js"></script>
 <script src="/app.js"></script></body></html>
